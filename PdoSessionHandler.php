@@ -65,6 +65,8 @@ class PdoSessionHandler implements SessionHandlerInterface {
         }
         
         $this->exists = true;
+
+        return true;
     }
     
     public function close() {
