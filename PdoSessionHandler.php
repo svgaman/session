@@ -77,7 +77,9 @@ class PdoSessionHandler implements SessionHandlerInterface {
         $table = $this->tablename;
         $col_sessid = $this->configs['col_sessid'];
         
-        $this->connection->query("DELETE FROM {$table} WHERE {$col_sessid}='{$sess_id}'");
+        $sql  = "DELETE FROM {$table} WHERE {$col_sessid}='{$sess_id}'";
+        $q = $this->connection->prepare($sql);
+        $res = $q->execute();
         
         return true;
     }
@@ -87,7 +89,9 @@ class PdoSessionHandler implements SessionHandlerInterface {
         $col_la = $this->configs['col_last_activity'];
         $expired_time = time() - $lifetime;
         
-        $this->connection->query("DELETE FROM {$table} WHERE {$col_la} <= {$expired_time}");
+        $sql  = "DELETE FROM {$table} WHERE {$col_la} <= {$expired_time}";
+        $q = $this->connection->prepare($sql);
+        $res = $q->execute();
         
         return true;
     }
