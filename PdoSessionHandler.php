@@ -74,7 +74,7 @@ class PdoSessionHandler implements SessionHandlerInterface {
     }
     
     public function destroy($sess_id) {
-        $table = $this->table;
+        $table = $this->tablename;
         $col_sessid = $this->configs['col_sessid'];
         
         $this->connection->query("DELETE FROM {$table} WHERE {$col_sessid}='{$sess_id}'");
@@ -83,7 +83,7 @@ class PdoSessionHandler implements SessionHandlerInterface {
     }
     
     public function gc($lifetime) {
-        $table = $this->table;
+        $table = $this->tablename;
         $col_la = $this->configs['col_last_activity'];
         $expired_time = time() - $lifetime;
         
